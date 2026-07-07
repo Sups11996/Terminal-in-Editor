@@ -26,8 +26,6 @@ The default VS Code terminal lives at the bottom of the screen. Every time you n
 
 ## Demo
 
-![Terminal as an editor tab](https://raw.githubusercontent.com/Sups11996/Terminal-in-Editor/main/images/terminal-as-tab.png)
-
 ![Terminal side by side with code](https://raw.githubusercontent.com/Sups11996/Terminal-in-Editor/main/images/screenshot-of-terminal.png)
 
 ---
@@ -100,4 +98,6 @@ Controls what happens when you press `Ctrl+W` on an editor terminal.
 
 Found a bug or want a feature? [Open an issue on GitHub](https://github.com/Sups11996/Terminal-in-Editor/issues).
 
-Made by [Suprim Khadka](https://github.com/Sups11996)
+Pull requests are welcome. For larger changes, open an issue first to discuss what you'd like to change.
+
+Made by [Sups](https://github.com/Sups11996)
