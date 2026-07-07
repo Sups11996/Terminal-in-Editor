@@ -1,10 +1,10 @@
 {
-  "name": "terminal-in-editor",
-  "displayName": "Terminal in Editor",
+  "name": "terminal-in-editor-tab",
+  "displayName": "Terminal in Editor Tab",
   "description": "Move your integrated terminal into the editor area as a tab. Toggle between editor and panel with a single shortcut.",
   "version": "0.2.0",
   "license": "MIT",
-  "publisher": "SuprimKhadka",
+  "publisher": "SupsDada11",
   "icon": "images/logo.png",
   "keywords": [
     "terminal",
