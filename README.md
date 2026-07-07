@@ -88,7 +88,7 @@ Controls what happens when you press `Ctrl+W` on an editor terminal.
 4. Click **Install**
 
 **Manual install**
-1. Download the `.vsix` from [GitHub Releases](https://github.com/Sups11996/Terminal-in-Editor)
+1. Download the `.vsix` from [Sups11996](https://github.com/Sups11996/Terminal-in-Editor)
 2. Press `Ctrl+Shift+P` → **Extensions: Install from VSIX**
 3. Select the downloaded file
 
