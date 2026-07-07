@@ -2,6 +2,16 @@
 
 All notable changes to Terminal in Editor are documented here.
 
+## [0.2.0] — 2026-07-08
+
+### Fixed
+- Images not rendering on the VS Code Marketplace and GitHub — switched to absolute raw GitHub URLs
+
+### Improved
+- Added `isEditorTerminal` helper for cleaner terminal state checks
+- Extracted config section and key names into constants to reduce duplication
+- Added JSDoc to `activate` and `deactivate` in `extension.ts`
+
 ## [0.1.0] — 2026-07-08
 
 ### Added
