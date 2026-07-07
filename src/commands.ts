@@ -1,5 +1,7 @@
 import * as vscode from "vscode";
-import { editorTerminals, resolveTerminal } from "./terminalState";
+import { editorTerminals, resolveTerminal, isEditorTerminal } from "./terminalState";
+
+const CONFIG_SECTION = "terminalInEditor";
 
 /**
  * Registers the "Toggle Terminal Location" command (Ctrl+Shift+').
@@ -12,13 +14,13 @@ export function registerToggleCommand(): vscode.Disposable {
   return vscode.commands.registerCommand(
     "terminal-in-editor.toggleTerminalLocation",
     async () => {
-      const config = vscode.workspace.getConfiguration("terminalInEditor");
+      const config = vscode.workspace.getConfiguration(CONFIG_SECTION);
       const focusTerminal = config.get<boolean>("focusTerminal", true);
 
       const active = vscode.window.activeTerminal;
 
       // Terminal is already in the editor — move it back to the panel.
-      if (active && editorTerminals.has(active)) {
+      if (active && isEditorTerminal(active)) {
         await vscode.commands.executeCommand(
           "workbench.action.terminal.moveToTerminalPanel",
         );
@@ -42,7 +44,7 @@ export function registerToggleCommand(): vscode.Disposable {
       }
 
       // Guard: already tracked as an editor terminal, nothing to do.
-      if (editorTerminals.has(terminal)) {
+      if (isEditorTerminal(terminal)) {
         return;
       }
 
@@ -72,13 +74,13 @@ export function registerCloseCommand(): vscode.Disposable {
   return vscode.commands.registerCommand(
     "terminal-in-editor.closeEditorTerminal",
     async () => {
-      const config = vscode.workspace.getConfiguration("terminalInEditor");
+      const config = vscode.workspace.getConfiguration(CONFIG_SECTION);
       const onClose = config.get<string>("confirmOnClose", "ask");
 
       const terminal = vscode.window.activeTerminal;
 
       // Not one of our terminals — fall through to normal tab close.
-      if (!terminal || !editorTerminals.has(terminal)) {
+      if (!terminal || !isEditorTerminal(terminal)) {
         await vscode.commands.executeCommand(
           "workbench.action.closeActiveEditor",
         );
