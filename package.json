@@ -1,0 +1,107 @@
+{
+  "name": "terminal-in-editor",
+  "displayName": "Terminal in Editor",
+  "description": "Move your integrated terminal into the editor area as a tab. Toggle between editor and panel with a single shortcut.",
+  "version": "0.2.0",
+  "license": "MIT",
+  "publisher": "SuprimKhadka",
+  "icon": "images/logo.png",
+  "keywords": [
+    "terminal",
+    "editor",
+    "terminal tab",
+    "integrated terminal",
+    "terminal panel",
+    "git bash",
+    "productivity",
+    "workflow"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sups11996/Terminal-in-Editor"
+  },
+  "bugs": {
+    "url": "https://github.com/Sups11996/Terminal-in-Editor/issues"
+  },
+  "homepage": "https://github.com/Sups11996/Terminal-in-Editor#readme",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "terminal-in-editor.toggleTerminalLocation",
+        "title": "Toggle Terminal Location (Editor / Panel)",
+        "category": "Terminal"
+      },
+      {
+        "command": "terminal-in-editor.closeEditorTerminal",
+        "title": "Close Editor Terminal",
+        "category": "Terminal"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "terminal-in-editor.toggleTerminalLocation",
+        "key": "ctrl+shift+'"
+      },
+      {
+        "command": "terminal-in-editor.closeEditorTerminal",
+        "key": "ctrl+w",
+        "when": "terminalEditorFocus || terminalFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Terminal in Editor",
+      "properties": {
+        "terminalInEditor.focusTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Focus the terminal after moving it into the editor."
+        },
+        "terminalInEditor.confirmOnClose": {
+          "type": "string",
+          "default": "ask",
+          "enum": ["ask", "kill", "moveToPanel"],
+          "enumDescriptions": [
+            "Ask whether to kill or keep the terminal open (Escape cancels).",
+            "Kill the terminal immediately without asking.",
+            "Always move the terminal back to the panel instead of killing it."
+          ],
+          "description": "Controls what happens when you press Ctrl+W on an editor terminal."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.125.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
