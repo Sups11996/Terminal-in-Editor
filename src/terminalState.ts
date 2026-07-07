@@ -3,6 +3,8 @@ import * as vscode from "vscode";
 /**
  * Tracks terminals that have been moved into the editor area by
  * this extension so we can correctly toggle them back to the panel.
+ *
+ * Using a Set ensures O(1) lookup and prevents duplicate entries.
  */
 export const editorTerminals = new Set<vscode.Terminal>();
 
@@ -15,6 +17,8 @@ export const editorTerminals = new Set<vscode.Terminal>();
  *
  * Returns `undefined` only when there are truly no terminals at all,
  * which tells the caller to create a fresh one.
+ *
+ * @returns The terminal to move, or `undefined` if none exist.
  */
 export function resolveTerminal(): vscode.Terminal | undefined {
   if (vscode.window.activeTerminal) {
@@ -30,4 +34,13 @@ export function resolveTerminal(): vscode.Terminal | undefined {
   }
 
   return undefined;
+}
+
+/**
+ * Returns `true` if the given terminal is currently tracked as an editor terminal.
+ *
+ * @param terminal - The terminal to check.
+ */
+export function isEditorTerminal(terminal: vscode.Terminal): boolean {
+  return editorTerminals.has(terminal);
 }
