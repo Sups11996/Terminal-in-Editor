@@ -2,7 +2,7 @@
   "name": "terminal-in-editor-tab",
   "displayName": "Terminal in Editor Tab",
   "description": "Move your integrated terminal into the editor area as a tab. Toggle between editor and panel with a single shortcut.",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "license": "MIT",
   "publisher": "SupsDada11",
   "icon": "images/logo.png",
@@ -52,11 +52,13 @@
     "keybindings": [
       {
         "command": "terminal-in-editor.toggleTerminalLocation",
-        "key": "ctrl+shift+'"
+        "key": "ctrl+shift+'",
+        "mac": "cmd+shift+'"
       },
       {
         "command": "terminal-in-editor.closeEditorTerminal",
         "key": "ctrl+w",
+        "mac": "cmd+w",
         "when": "terminalEditorFocus || terminalFocus"
       }
     ],
