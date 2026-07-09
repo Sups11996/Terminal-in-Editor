@@ -19,6 +19,9 @@ The default VS Code terminal lives at the bottom of the screen. Every time you n
 - **One shortcut to toggle** — `Ctrl+Shift+'` moves your terminal to the editor. Press it again to send it back to the panel.
 - **Works with any shell** — Git Bash, PowerShell, Command Prompt, zsh, or anything configured in VS Code.
 - **Smart terminal reuse** — uses your existing terminal instead of creating a new one. Creates a new one only if none exists.
+- **Pick which terminal to move** — when multiple terminals are open, a quick-pick lets you choose exactly which one to bring into the editor.
+- **Status bar indicator** — shows a live count of how many terminals are currently in the editor area.
+- **Auto-move new terminals** — optional setting to automatically move every new terminal into the editor so the panel is never used.
 - **Configurable close behavior** — decide what `Ctrl+W` does: ask, kill immediately, or move back to panel.
 - **No lost terminals** — every terminal moved to the editor is tracked and can always be recovered.
 
@@ -76,6 +79,12 @@ Controls what happens when you press `Ctrl+W` on an editor terminal.
 |---|---|
 | `true` *(default)* | Terminal receives focus after moving to editor |
 | `false` | Focus stays in the editor after moving |
+
+### `terminalInEditor.autoMoveNewTerminals`
+| Value | Behavior |
+|---|---|
+| `false` *(default)* | New terminals open in the panel as normal |
+| `true` | Every new terminal is automatically moved into the editor area |
 
 ---
 

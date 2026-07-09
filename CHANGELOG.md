@@ -2,6 +2,13 @@
 
 All notable changes to Terminal in Editor are documented here.
 
+## [1.2.0] — 2026-07-10
+
+### Added
+- Status bar indicator showing live count of terminals currently in the editor area
+- Quick-pick terminal selector — when multiple panel terminals exist, a picker lets you choose which one to move
+- `terminalInEditor.autoMoveNewTerminals` setting — when enabled, every new terminal is automatically moved into the editor area
+
 ## [1.1.0] — 2026-07-10
 
 ### Improved

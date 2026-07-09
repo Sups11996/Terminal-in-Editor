@@ -2,7 +2,7 @@
   "name": "terminal-in-editor-tab",
   "displayName": "Terminal in Editor Tab",
   "description": "Move your integrated terminal into the editor area as a tab. Toggle between editor and panel with a single shortcut.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "publisher": "SupsDada11",
   "icon": "images/logo.png",
@@ -80,6 +80,11 @@
             "Always move the terminal back to the panel instead of killing it."
           ],
           "description": "Controls what happens when you press Ctrl+W on an editor terminal."
+        },
+        "terminalInEditor.autoMoveNewTerminals": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically move every newly created terminal into the editor area. When enabled, the panel is never used for new terminals."
         }
       }
     }

@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { editorTerminals, resolveTerminal, isEditorTerminal } from "./terminalState";
+import { editorTerminals, resolveTerminal, isEditorTerminal, updateStatusBar } from "./terminalState";
 
 const CONFIG_SECTION = "terminalInEditor";
 
@@ -7,8 +7,8 @@ const CONFIG_SECTION = "terminalInEditor";
  * Registers the "Toggle Terminal Location" command (Ctrl+Shift+').
  *
  * - Active terminal is in editor → moves it back to the panel.
- * - Otherwise → moves the active/last panel terminal into the editor,
- *   or creates a new terminal if none exists.
+ * - Multiple panel terminals → shows a quick-pick to choose which to move.
+ * - No terminals → creates a new one directly in the editor.
  */
 export function registerToggleCommand(): vscode.Disposable {
   return vscode.commands.registerCommand(
@@ -25,14 +25,15 @@ export function registerToggleCommand(): vscode.Disposable {
           "workbench.action.terminal.moveToTerminalPanel",
         );
         editorTerminals.delete(active);
+        updateStatusBar();
         return;
       }
 
-      // Move a panel terminal into the editor, or create a new one.
-      let terminal = resolveTerminal();
+      // Resolve which panel terminal to move (may show a quick-pick).
+      let terminal = await resolveTerminal();
 
       if (!terminal) {
-        // Subscribe BEFORE creating so we never miss the open event.
+        // No panel terminals — create a new one directly in the editor.
         const readyPromise = new Promise<void>((resolve) => {
           const disposable = vscode.window.onDidOpenTerminal(() => {
             disposable.dispose();
@@ -53,6 +54,7 @@ export function registerToggleCommand(): vscode.Disposable {
         "workbench.action.terminal.moveToEditor",
       );
       editorTerminals.add(terminal);
+      updateStatusBar();
 
       if (!focusTerminal) {
         await vscode.commands.executeCommand(
@@ -66,9 +68,10 @@ export function registerToggleCommand(): vscode.Disposable {
 /**
  * Registers the "Close Editor Terminal" command (Ctrl+W).
  *
- * Prompts the user before killing an editor terminal.
- * The prompt can be disabled via the `terminalInEditor.confirmOnClose`
- * setting — when off, the terminal is killed immediately.
+ * Behavior is controlled by the `terminalInEditor.confirmOnClose` setting:
+ * - `ask` — shows a confirmation prompt (default)
+ * - `kill` — kills immediately
+ * - `moveToPanel` — moves back to panel instead of killing
  */
 export function registerCloseCommand(): vscode.Disposable {
   return vscode.commands.registerCommand(
@@ -88,16 +91,16 @@ export function registerCloseCommand(): vscode.Disposable {
       }
 
       if (onClose === "kill") {
-        // Kill immediately, no prompt.
         editorTerminals.delete(terminal);
+        updateStatusBar();
         terminal.dispose();
 
       } else if (onClose === "moveToPanel") {
-        // Always move back to panel instead of killing.
         await vscode.commands.executeCommand(
           "workbench.action.terminal.moveToTerminalPanel",
         );
         editorTerminals.delete(terminal);
+        updateStatusBar();
 
       } else {
         // "ask" — show confirmation prompt.
@@ -109,6 +112,7 @@ export function registerCloseCommand(): vscode.Disposable {
 
         if (choice === "Kill Terminal") {
           editorTerminals.delete(terminal);
+          updateStatusBar();
           terminal.dispose();
         }
         // Dismissed (Escape) → terminal stays open.
