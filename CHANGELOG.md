@@ -2,6 +2,16 @@
 
 All notable changes to Terminal in Editor are documented here.
 
+## [1.1.0] — 2026-07-10
+
+### Improved
+- Lowered minimum VS Code requirement from 1.125.0 to 1.58.0 — compatible with any VS Code released since July 2021
+
+## [1.0.0] — 2026-07-10
+
+### Added
+- macOS support — native `Cmd+Shift+'` and `Cmd+W` keybindings for Mac users (Windows and Linux keep `Ctrl`)
+
 ## [0.2.0] — 2026-07-08
 
 ### Fixed
