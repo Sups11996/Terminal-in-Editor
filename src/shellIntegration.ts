@@ -11,8 +11,14 @@ const CONFIG_KEY = "commandsToSkipShell";
  * Adds our commands to `terminal.integrated.commandsToSkipShell` so
  * shells like Git Bash don't intercept Ctrl+W / Ctrl+Shift+' before
  * VS Code can handle them.
+ *
+ * @returns A promise that resolves once the setting has been updated,
+ * or immediately if no changes were needed.
  */
 export async function registerCommandsToSkipShell(): Promise<void> {
+  if (COMMANDS_TO_SKIP.length === 0) {
+    return;
+  }
   const config = vscode.workspace.getConfiguration("terminal.integrated");
   const existing: string[] = config.get(CONFIG_KEY, []);
   const merged = Array.from(new Set([...existing, ...COMMANDS_TO_SKIP]));
