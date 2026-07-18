@@ -41,7 +41,7 @@ export function updateStatusBar(): void {
   if (count === 0) {
     statusBarItem.hide();
   } else {
-    statusBarItem.text = `$(terminal) ${count} editor terminal${count === 1 ? "" : "s"}`;
+    statusBarItem.text = `$(terminal) ${count} editor terminal${count === 1 ? "" : "s"} open`;
     statusBarItem.show();
   }
 }
