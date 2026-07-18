@@ -23,7 +23,7 @@ export function initStatusBar(context: vscode.ExtensionContext): void {
     100,
   );
   statusBarItem.command = "terminal-in-editor.toggleTerminalLocation";
-  statusBarItem.tooltip = "Toggle terminal location (editor / panel)";
+  statusBarItem.tooltip = "Click to toggle terminal location (editor ↔ panel)";
   context.subscriptions.push(statusBarItem);
   updateStatusBar();
 }
