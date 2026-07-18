@@ -57,6 +57,14 @@ Press **`Ctrl+W`** — behavior is controlled by the `terminalInEditor.confirmOn
 | `Ctrl+Shift+'` | Editor terminal tab | Move terminal back to panel |
 | `Ctrl+W` | Editor terminal tab | Close (behavior depends on setting) |
 
+**Mac:**
+
+| Shortcut | Context | Action |
+|---|---|---|
+| `Cmd+Shift+'` | Editor or panel terminal | Move terminal to editor |
+| `Cmd+Shift+'` | Editor terminal tab | Move terminal back to panel |
+| `Cmd+W` | Editor terminal tab | Close (behavior depends on setting) |
+
 To customize shortcuts: `Ctrl+K Ctrl+S` → search **Terminal in Editor**.
 
 ---
@@ -109,4 +117,4 @@ Found a bug or want a feature? [Open an issue on GitHub](https://github.com/Sups
 
 Pull requests are welcome. For larger changes, open an issue first to discuss what you'd like to change.
 
-Made by [Sups](https://github.com/Sups11996)
+Made by [Sups Dada](https://github.com/Sups11996)
