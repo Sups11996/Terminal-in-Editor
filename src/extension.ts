@@ -31,7 +31,9 @@ export async function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    // Small delay so the terminal is fully initialised before we move it.
+    // Wait 150ms for the terminal process to fully initialise before issuing
+    // the move command. Without this delay, the terminal tab may not yet exist
+    // in the editor group and the command silently does nothing.
     await new Promise<void>((resolve) => setTimeout(resolve, 150));
 
     terminal.show();
