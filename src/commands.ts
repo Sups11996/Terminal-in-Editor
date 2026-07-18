@@ -34,6 +34,8 @@ export function registerToggleCommand(): vscode.Disposable {
 
       if (!terminal) {
         // No panel terminals — create a new one directly in the editor.
+        // We subscribe to onDidOpenTerminal BEFORE calling createTerminal to
+        // guarantee we never miss the event, even if it fires synchronously.
         const readyPromise = new Promise<void>((resolve) => {
           const disposable = vscode.window.onDidOpenTerminal(() => {
             disposable.dispose();
@@ -105,7 +107,7 @@ export function registerCloseCommand(): vscode.Disposable {
       } else {
         // "ask" — show confirmation prompt.
         const choice = await vscode.window.showWarningMessage(
-          `Kill terminal "${terminal.name}"?`,
+          `Kill terminal "${terminal.name}"? (Press Escape to cancel)`,
           { modal: true },
           "Kill Terminal",
         );
