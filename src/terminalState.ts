@@ -14,6 +14,8 @@ let statusBarItem: vscode.StatusBarItem | undefined;
 /**
  * Creates and shows the status bar item.
  * Call once from `activate`.
+ *
+ * @param context - The extension context used to register the item for disposal.
  */
 export function initStatusBar(context: vscode.ExtensionContext): void {
   statusBarItem = vscode.window.createStatusBarItem(
@@ -28,7 +30,8 @@ export function initStatusBar(context: vscode.ExtensionContext): void {
 
 /**
  * Refreshes the status bar text to reflect the current editor terminal count.
- * Call this whenever `editorTerminals` changes.
+ * Must be called whenever a terminal is added to or removed from `editorTerminals`,
+ * and also when a terminal is closed externally via `onDidCloseTerminal`.
  */
 export function updateStatusBar(): void {
   if (!statusBarItem) {
@@ -66,8 +69,9 @@ export async function resolveTerminal(): Promise<vscode.Terminal | undefined> {
   }
 
   // Multiple terminals — let the user pick.
-  const items = panelTerminals.map((t) => ({
+  const items = panelTerminals.map((t, i) => ({
     label: `$(terminal) ${t.name}`,
+    detail: `Terminal ${i + 1} of ${panelTerminals.length}`,
     terminal: t,
   }));
 
