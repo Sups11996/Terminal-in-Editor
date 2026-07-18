@@ -76,7 +76,7 @@ export async function resolveTerminal(): Promise<vscode.Terminal | undefined> {
   }));
 
   const picked = await vscode.window.showQuickPick(items, {
-    placeHolder: "Select a terminal to move into the editor",
+    placeHolder: `Select a terminal to move into the editor (${panelTerminals.length} available)`,
   });
 
   return picked?.terminal;
